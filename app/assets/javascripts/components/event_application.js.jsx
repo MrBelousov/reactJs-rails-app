@@ -17,6 +17,20 @@ var EventApplication = React.createClass({
     this.setState({ events: events });
   },
 
+  handleDeleteRecord: function (event) {
+    var events = this.state.events.slice();
+    var index = events.indexOf(event);
+    events.splice(index, 1);
+    this.setState({ events: events })
+  },
+
+  handleUpdateRecord: function (old_event, event) {
+    var events = this.state.events.slice();
+    var index = events.indexOf(old_event);
+    events.splice(index, 1, event);
+    this.setState({ events: events });
+  },
+
   getDataFromApi: function () {
     var self = this;
 
@@ -47,7 +61,9 @@ var EventApplication = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-12">
-            <EventTable events={ this.state.events } />
+            <EventTable events={ this.state.events }
+                        handleDeleteRecord={ this.handleDeleteRecord }
+                        handleUpdateRecord={ this.handleUpdateRecord } />
           </div>
         </div>
       </div>
