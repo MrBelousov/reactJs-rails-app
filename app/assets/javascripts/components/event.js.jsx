@@ -39,7 +39,7 @@ var Event = React.createClass({
       var event_data = {
         name: this.recordValue("name"),
         description: this.recordValue("description"),
-        date: this.recordValue("date"),
+        event_date: this.recordValue("date"),
         place: this.recordValue("place")
       };
 

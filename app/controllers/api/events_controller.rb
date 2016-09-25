@@ -1,6 +1,6 @@
 class Api::EventsController < Api::ApplicationController
   def index
-    render json: Event.ordered
+    render json: Event.order(sort_by + ' ' + order)
   end
 
   def create
@@ -41,5 +41,13 @@ class Api::EventsController < Api::ApplicationController
   def event
     return @event if defined?(@event)
     @event = Event.find(params[:id])
+  end
+
+  def sort_by
+    %w(name place description event_date).include?(params[:sort_by]) ? params[:sort_by] : 'name'
+  end
+
+  def order
+    %w(asc desc).include?(params[:order]) ? params[:order] : 'desc'
   end
 end
